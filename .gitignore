@@ -19,3 +19,6 @@ vendor/
 /*/.DS_*
 .env
 cmd/chat-server/chat-server-dev
+video-zip/eco-007
+video-zip/eco-007/*
+video-zip/video-zip
