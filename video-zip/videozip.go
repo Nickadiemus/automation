@@ -59,7 +59,8 @@ func main() {
 		yamlPath = pwd + dir + yamlName
 		zipPath = dir
 	}
-
+	// creating a copy of yaml file for file safety
+	copyConfig(yamlName, yamlPath)
 	var videoconfig VideoConfig
 	getConfig(yamlPath, &videoconfig)
 	if debug {
@@ -158,4 +159,20 @@ func checkYaml(yFile string) bool {
 // Validates Zip file extension
 func checkZip(zFile string) bool {
 	return regexp.MustCompile(`^.*\.(zip|ZIP)$`).MatchString(zFile)
+}
+
+// Creates a local copy of the configuration file
+func copyConfig(name, yPath string) {
+	//Read all the contents of the  original file
+	bytesRead, err := ioutil.ReadFile(yPath)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	//Copy all the contents to the desitination file
+	err = ioutil.WriteFile("copy-"+name, bytesRead, 0755)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 }
